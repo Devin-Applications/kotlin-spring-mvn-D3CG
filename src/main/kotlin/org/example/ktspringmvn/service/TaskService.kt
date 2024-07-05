@@ -5,14 +5,17 @@ import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import java.util.concurrent.ConcurrentHashMap
+import java.util.UUID
 
 @Service
 class TaskService {
     private val tasks = ConcurrentHashMap<String, Task>()
 
     fun createTask(task: Task): Mono<Task> {
-        tasks[task.id] = task
-        return Mono.just(task)
+        val taskId = task.id ?: UUID.randomUUID().toString()
+        val newTask = task.copy(id = taskId)
+        tasks[taskId] = newTask
+        return Mono.just(newTask)
     }
 
     fun getTask(id: String): Mono<Task> {
