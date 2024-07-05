@@ -27,6 +27,9 @@ class TaskService {
     }
 
     fun updateTask(id: String, task: Task): Mono<Task> {
+        if (task.id == null) {
+            println("Error: Task ID is null during update operation")
+        }
         val updatedTask = task.copy(id = id)
         tasks[id] = updatedTask
         return Mono.just(updatedTask)
