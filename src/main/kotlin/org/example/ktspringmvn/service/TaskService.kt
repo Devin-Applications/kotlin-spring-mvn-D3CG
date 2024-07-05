@@ -27,8 +27,9 @@ class TaskService {
     }
 
     fun updateTask(id: String, task: Task): Mono<Task> {
-        tasks[id] = task
-        return Mono.just(task)
+        val updatedTask = task.copy(id = id)
+        tasks[id] = updatedTask
+        return Mono.just(updatedTask)
     }
 
     fun deleteTask(id: String): Mono<Void> {
