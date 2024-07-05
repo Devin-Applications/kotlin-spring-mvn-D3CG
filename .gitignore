@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### PR Description ###
+PR_DESCRIPTION.md
